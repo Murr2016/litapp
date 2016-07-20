@@ -27,7 +27,7 @@ Html, body {
 	padding:0;
 	font-family: Akzidenz;
 	font-size:20px;
-	background:#CF0;
+	background:#F60;
 	
 	}
 #Input_Text {
@@ -35,7 +35,7 @@ Html, body {
 	font-size:20px;
 	font-weight:lighter;
 	width:100%;
-	background-color:#CF0;
+	background-color:#F60;
 	border:none;
 	}
 p {
