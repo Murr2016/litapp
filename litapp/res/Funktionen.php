@@ -219,5 +219,23 @@ function get_all_sentences_table ()
 	mysqli_free_result( $output );
 }
 
+// Exports all sentences into a re-importable .sql script (insert statements)
+function export_sentences () {
+  // connect to db and fetch all sentences
+  $db_link = mysqli_connect (MYSQL_HOST, MYSQL_BENUTZER, MYSQL_KENNWORT, MYSQL_DATENBANK);
+  $sql = "SELECT * FROM Sentences;";
+  $result = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
+  // init new sql script
+  $sql_export = "INSERT INTO Sentences(`ID`, `ID_Parent`, `Text`, `HasChildren`) VALUES"
+  while ($row = mysqli_fetch_array($output, MYSQL_ASSOC)) {
+    $sql_export .= "\n('" . implode($row, "', '") . "')";
+  }
+  $sql_export .= ";"
+  // output sql script
+  echo $sql_export;
+  // close connection and free result
+  mysqli_free_result($result);
+}
+
 
 ?>
