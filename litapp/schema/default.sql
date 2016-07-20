@@ -23,7 +23,7 @@ USE `LitUpDB`;
 CREATE TABLE `Sentences` (
   `ID` int(11) NOT NULL,
   `ID_Parent` int(11) NOT NULL,
-  `HasChildren` boolean(1) DEFAULT '0',
+  `HasChildren` boolean DEFAULT '0',
   `Text` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
