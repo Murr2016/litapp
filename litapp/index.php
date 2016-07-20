@@ -27,7 +27,7 @@ Html, body {
 	padding:0;
 	font-family: Akzidenz;
 	font-size:20px;
-	background:#99F;
+	background:#CF0;
 	
 	}
 #Input_Text {
@@ -35,7 +35,7 @@ Html, body {
 	font-size:20px;
 	font-weight:lighter;
 	width:100%;
-	background-color:#99F;
+	background-color:#CF0;
 	border:none;
 	}
 p {
@@ -96,7 +96,7 @@ document.getElementById('Input_Text').onkeydown = function(e){
     <input type="text" name="ID_Parent" id="ID_Parent" value="<?=$random['ID']?>" style="visibility:hidden;"/>
   </p>
   <p>
-    <input type="submit" name="Submit" id="submit" value="Submit" style="visibility:hidden;"/>
+    <input type="submit" name="Submit" id="submit" value="Submit" style="visibility:hidden;" readonly="readonly"/>
   </p>
 </form>
 
