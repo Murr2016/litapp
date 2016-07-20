@@ -2,7 +2,16 @@
 session_start();
 require_once("res/settings.php"); 
 require_once("res/Funktionen.php"); 
+
+/*
+$Hintergrund_Farben = array ( 0 => "#F60", 1 => "#CF0", 2 => "#3CF", 3 => "#09F", 4 => "#3C0", 5 => "#F90", 6 => "#3CC", 7 => "#69F", 8 => "#F3C", 9 => "#FFF", 10 => "#C3C3C3", 11 => "#F03"); 
+
+$Hintergrund = $Hintergrund_Farben[mt_rand(0,11)];
+*/
 ?>
+
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -27,7 +36,7 @@ Html, body {
 	padding:0;
 	font-family: Akzidenz;
 	font-size:20px;
-	background:#F60;
+	background:<?=$Hintergrund?>;
 	
 	}
 #Input_Text {
@@ -35,7 +44,7 @@ Html, body {
 	font-size:20px;
 	font-weight:lighter;
 	width:100%;
-	background-color:#F60;
+	background-color:<?=$Hintergrund?>;
 	border:none;
 	}
 p {
