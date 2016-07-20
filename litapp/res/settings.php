@@ -25,7 +25,7 @@ define ( 'MYSQL_BENUTZER',  'root' );
 define ( 'MYSQL_KENNWORT',  '' );
 // für unser Bsp. nennen wir die DB adressverwaltung
 define ( 'MYSQL_DATENBANK', 'LitAppDB' );
-define ( 'MYSQL_TABELLE', 'sentences');
+define ( 'MYSQL_TABELLE', 'Sentences');
 
 
 ////
