@@ -1,6 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
-require_once("settings.php"); 
+require_once("settings.php");
 
 // FUNKTIONEN ALLE STORIES
 
@@ -11,199 +10,199 @@ require_once("settings.php");
 function array_multi_search($mSearch, $aArray, $sKey = "")
 {
     $aResult = array();
-   
+
     foreach( (array) $aArray as $aValues)
     {
         if($sKey === "" && in_array($mSearch, $aValues)) $aResult[] = $aValues;
         else
         if(isset($aValues[$sKey]) && $aValues[$sKey] == $mSearch) $aResult[] = $aValues;
     }
-   
+
     return $aResult;
 }
 
 //  Funktion get_all_stories ()
 
 
-function get_all_stories () 
+function get_all_stories ()
 {
 	$db_link = mysqli_connect (
-		MYSQL_HOST, 
-		MYSQL_BENUTZER, 
-		MYSQL_KENNWORT, 
+		MYSQL_HOST,
+		MYSQL_BENUTZER,
+		MYSQL_KENNWORT,
 		MYSQL_DATENBANK);
-		
+
 	$sql = "SELECT * FROM Sentences;";
 	$output = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
-	
-	
+
+
 	while ($zeile = mysqli_fetch_array( $output, MYSQL_ASSOC)) {
 
 		 $Sentences[] = $zeile;
 		}
-	
+
 	mysqli_free_result( $output );
-	
+
 	$Endpunkte = array_multi_search(0, $Sentences, "HasChildren");
-	
+
 	foreach($Endpunkte as $Value)
 	{
-		$ID_Endpunkte[] = $Value["ID"]; 
+		$ID_Endpunkte[] = $Value["ID"];
 	}
-	
-	
+
+
 	// ENDPUNKT VON DEM AUSGEHEND DER BAUM ERSTELLT WIRD
 	$All_Stories = "";
-	$Anzahl_Sentences = count($Sentences)-1;  
-	
+	$Anzahl_Sentences = count($Sentences)-1;
+
 	foreach($ID_Endpunkte as $Select) {
-	
+
 		$ii = $Select;
-		for ($i = $Anzahl_Sentences; $i >= 0; $i--) 
+		for ($i = $Anzahl_Sentences; $i >= 0; $i--)
 		{
-			if ($Sentences[$i]["ID"] == $ii) 
+			if ($Sentences[$i]["ID"] == $ii)
 			{
 				$Zwischenspeicher = $Sentences[$i]["Text"].SENTENCE_SEPERATOR.$All_Stories;
-				$All_Stories = $Zwischenspeicher; 
-				$Zwischenspeicher = ""; 
+				$All_Stories = $Zwischenspeicher;
+				$Zwischenspeicher = "";
 				$ii = $Sentences[$i]["ID_Parent"];
-			} {  
+			} {
 			// ELSE
 			// MUSS LEER BLEIBEN
 			}
-			
+
 		}
-		$All_Stories = STORY_SEPERATOR.$All_Stories;  //Abstand zwischen den einzelnen Stories 
+		$All_Stories = STORY_SEPERATOR.$All_Stories;  //Abstand zwischen den einzelnen Stories
 	}
-	
-	return($All_Stories); 
+
+	return($All_Stories);
 }
 
 
-/**************** 
+/****************
 ** 	Funktion get_random_Text
-**	Funktion: Wählt einen Ast des Baumes aus und gibt ihn zurück 
-** 
+**	Funktion: Wählt einen Ast des Baumes aus und gibt ihn zurück
+**
 ****/
 
-function get_random_story () 
+function get_random_story ()
 {
-	$Story_chronologisch = ""; 
+	$Story_chronologisch = "";
 	$db_link = mysqli_connect (
-		MYSQL_HOST, 
-		MYSQL_BENUTZER, 
-		MYSQL_KENNWORT, 
+		MYSQL_HOST,
+		MYSQL_BENUTZER,
+		MYSQL_KENNWORT,
 		MYSQL_DATENBANK);
-		
+
 	$sql = "SELECT * FROM Sentences;";
 	$output = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
-	
-	
+
+
 	while ($zeile = mysqli_fetch_array( $output, MYSQL_ASSOC)) {
 
 		 $Sentences[] = $zeile;
 		}
-	
+
 	mysqli_free_result( $output );
-	
+
 	$Endpunkte = array_multi_search(0, $Sentences, "HasChildren");
-	
+
 	foreach($Endpunkte as $Value)
 	{
-		$ID_Endpunkte[] = $Value["ID"]; 
+		$ID_Endpunkte[] = $Value["ID"];
 	}
-	
-	$max = count($ID_Endpunkte) -1; 
-	$random = mt_rand(ANZAHL_BAEUME, $max); 
-	
-	// ENDPUNKT VON DEM DER BAUM ERSTELLT WERDEN MUSS -> 
-	$Selected_Endpunkt = $ID_Endpunkte[$random]; 
-	$Anzahl_Sentences = count($Sentences)-1; 
+
+	$max = count($ID_Endpunkte) -1;
+	$random = mt_rand(ANZAHL_BAEUME, $max);
+
+	// ENDPUNKT VON DEM DER BAUM ERSTELLT WERDEN MUSS ->
+	$Selected_Endpunkt = $ID_Endpunkte[$random];
+	$Anzahl_Sentences = count($Sentences)-1;
 	$ii = $Selected_Endpunkt;
 	$Random_Story = "";
-	 
-	for ($i = $Anzahl_Sentences; $i >= 0; $i--) 
+
+	for ($i = $Anzahl_Sentences; $i >= 0; $i--)
 	{
-		if ($Sentences[$i]["ID"] == $ii) 
+		if ($Sentences[$i]["ID"] == $ii)
 		{
 			$Zwischenspeicher = $Sentences[$i]["Text"]."<br>".$Random_Story;
-			$Random_Story = $Zwischenspeicher; 
-			$Zwischenspeicher = ""; 
+			$Random_Story = $Zwischenspeicher;
+			$Zwischenspeicher = "";
 			$ii = $Sentences[$i]["ID_Parent"];
 		}
-	} 
-	return($Random_Story); 
+	}
+	return($Random_Story);
 }
 
 
 //einen einzelnen zufälligen Post
-function get_random_post () {	
-	
-	
+function get_random_post () {
+
+
 	$db_link = mysqli_connect (
-		MYSQL_HOST, 
-		MYSQL_BENUTZER, 
-		MYSQL_KENNWORT, 
+		MYSQL_HOST,
+		MYSQL_BENUTZER,
+		MYSQL_KENNWORT,
 		MYSQL_DATENBANK);
-		
+
 	$sql = "SELECT MAX(ID) FROM Sentences";
 		$row = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
 		$ret = mysqli_fetch_array($row);
 		$Anzahl = $ret["MAX(ID)"];
-		if($Anzahl == 0) 
-		{ 
+		if($Anzahl == 0)
+		{
 			$Parent_Node['ID'] = 0;
 		}else {
-			$Parent_Node['ID'] = mt_rand(ANZAHL_BAEUME, $Anzahl); 
+			$Parent_Node['ID'] = mt_rand(ANZAHL_BAEUME, $Anzahl);
 		}
-	
-	$sql = "SELECT * FROM Sentences WHERE ID = ".$Parent_Node['ID'].";";	 
+
+	$sql = "SELECT * FROM Sentences WHERE ID = ".$Parent_Node['ID'].";";
 		$row = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
 		$ret = mysqli_fetch_array($row);
 		$Parent_Node['Text'] = $ret["Text"];
 		mysqli_close($db_link);
-		
+
 		return($Parent_Node);
-		
+
 
 }
 
 // Chronologisch - Einfach
-function get_all_sentences () 
+function get_all_sentences ()
 {
-	$Story_chronologisch = ""; 
+	$Story_chronologisch = "";
 	require_once("../res/settings.php");
 	$db_link = mysqli_connect (
-		MYSQL_HOST, 
-		MYSQL_BENUTZER, 
-		MYSQL_KENNWORT, 
+		MYSQL_HOST,
+		MYSQL_BENUTZER,
+		MYSQL_KENNWORT,
 		MYSQL_DATENBANK);
-		
+
 	$sql = "SELECT Text FROM Sentences;";
-	
+
 	$output = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
-	
+
 	while ($sentence = mysqli_fetch_array($output, MYSQL_ASSOC)) {
     $Story_chronologisch = $Story_chronologisch."<br>".$sentence["Text"];
 	}
-	mysqli_close($db_link); 
+	mysqli_close($db_link);
 	return($Story_chronologisch);
 }
 // TABELLARISCH
-function get_all_sentences_table () 
+function get_all_sentences_table ()
 {
-	$Story_chronologisch = ""; 
+	$Story_chronologisch = "";
 	require_once("../res/settings.php");
 	$db_link = mysqli_connect (
-		MYSQL_HOST, 
-		MYSQL_BENUTZER, 
-		MYSQL_KENNWORT, 
+		MYSQL_HOST,
+		MYSQL_BENUTZER,
+		MYSQL_KENNWORT,
 		MYSQL_DATENBANK);
-		
+
 	$sql = "SELECT * FROM Sentences;";
-	
+
 	$output = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
-	
+
 	$Story_Tabelle = '<table border="1">';
 		while ($zeile = mysqli_fetch_array( $output, MYSQL_ASSOC))
 		{
@@ -215,8 +214,8 @@ function get_all_sentences_table ()
 		  $Story_Tabelle .= "</tr>";
 	}
 	$Story_Tabelle .= "</table>";
-	return($Story_Tabelle); 
- 
+	return($Story_Tabelle);
+
 	mysqli_free_result( $output );
 }
 
