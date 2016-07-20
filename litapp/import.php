@@ -3,7 +3,10 @@ require_once("res/Funktionen.php");
 
 // Process uploaded file (if any)
 if(isset($_POST["submit"])) {
-    echo $_FILES['uploadedFile']['tmp_name'];
+    // read uploaded file into string
+    $sql_string = file_get_contents($_FILES['uploadedFile']['tmp_name']);
+    // connect to database
+    sql_execute($sql_string);
 }
 ?>
 <!DOCTYPE html>

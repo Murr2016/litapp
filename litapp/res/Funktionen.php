@@ -238,5 +238,12 @@ function export_sentences () {
   mysqli_free_result($result);
 }
 
+// Executes @param sql in the database
+function sql_execute ($sql) {
+  // connect to db and fetch all sentences
+  $db_link = mysqli_connect (MYSQL_HOST, MYSQL_BENUTZER, MYSQL_KENNWORT, MYSQL_DATENBANK);
+  $result = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
+  mysqli_free_result($result);
+}
 
 ?>
