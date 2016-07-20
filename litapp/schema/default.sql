@@ -11,8 +11,8 @@ SET time_zone = "+01:00";
 -- Datenbank: `LitAppDB`
 --
 
-CREATE DATABASE IF NOT EXISTS `LitUpDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci
-USE `LitUpDB`
+CREATE DATABASE IF NOT EXISTS `LitUpDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `LitUpDB`;
 
 -- --------------------------------------------------------
 
