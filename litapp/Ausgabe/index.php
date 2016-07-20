@@ -30,7 +30,19 @@ switch ($Ausgabe) {
 	break;
 	
 	default:
-	$output = "Choose your Weapons!"; 
+	$output = '<form id="Form_Ausgabe" name="Ausgabe" method="get" action="index.php">
+  <p>
+    <select name="Ausgabe" id="select">
+      <option value="random_story" selected="selected">Random Story</option>
+      <option value="all_stories">All Stories</option>
+      <option value="chronological_table">chronological table</option>
+      <option value="chronologically">chronologically</option>
+    </select>
+  </p>
+  <p>
+    <input type="submit" name="Submit" id="Submit" value="Submit" />
+  </p>
+</form>'; 
 	
 	}
 ?>
