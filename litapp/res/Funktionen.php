@@ -227,15 +227,23 @@ function export_sentences () {
   $result = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
   // init new sql script
   $sql_export = "INSERT INTO Sentences(`ID`, `ID_Parent`, `Text`, `HasChildren`) VALUES";
-  while ($row = mysqli_fetch_array($output, MYSQL_ASSOC)) {
-    $sql_export .= "\n('" . implode($row, "', '") . "')";
+  while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+    $sql_export .= "\n(" . $row['ID'] . ", " . $row['ID_Parent'] . ', "'.$row['Text'].'", ' . $row['HasChildren'] . "),";
   }
-  $sql_export .= ";"
+  $sql_export = rtrim($sql_export, ','); // remove trailing row separator
+  $sql_export .= ";";
   // output sql script
   echo $sql_export;
   // close connection and free result
   mysqli_free_result($result);
 }
 
+// Executes @param sql in the database
+function sql_execute ($sql) {
+  // connect to db and fetch all sentences
+  $db_link = mysqli_connect (MYSQL_HOST, MYSQL_BENUTZER, MYSQL_KENNWORT, MYSQL_DATENBANK);
+  $result = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
+  mysqli_free_result($result);
+}
 
 ?>
