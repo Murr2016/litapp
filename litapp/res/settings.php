@@ -1,4 +1,4 @@
-<?
+<?php
 /**********
 **
 ** In dieser Datei werden die Parameter gesetzt.
