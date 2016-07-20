@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<script type="text/javascript">  
+var $regelverstoesse = 0;
+function textchange()  
+{  
+var $string = document.getElementById('TextArea').value;
+var $geladener_Satz = "Murrlig!"; 
+
+if( $string.substring(0,12) != $geladener_Satz) {
+	$regelverstoesse += 1;
+	$relevante_Eingabe = $string.substring($geladener_Satz.length, $string.length);
+	document.getElementById('TextArea').value = $geladener_Satz + $relevante_Eingabe;
+	if($regelverstoesse == 10) {
+		alert("Merkst du es nicht, der geladene Text kann nicht verändert werden?"); 
+		}
+if($regelverstoesse == 15) {
+		alert("Ich bin sehr geduldig. Du scheinst auch sehr hartnäckig zu sein..."); 
+		}
+		
+	if($regelverstoesse == 20) {
+		alert("Muss ich mir sorgen machen?"); 
+		}
+		
+	if($regelverstoesse == 25) {
+		alert("Muss ich mir ernsthaft sorgen machen?"); 
+		}
+	
+	
+	if($regelverstoesse == 30) {
+		alert("Ich glaube, du bist zu dumm für die LitApp. "); 
+		}
+	
+	if($regelverstoesse == 50) {
+		alert("Ok, ok. Versuch es ruhig weiter. Ich akzeptiere deine Sturheit."); 
+		}
+} 
+
+
+}  
+</script>
+
+</head>
+
+<body>
+<textarea id="TextArea" cols="50" rows="50" onkeyup="textchange()" onkeydown="textchange()">Murrlig!</textarea>
+
+</body>
+</html>
