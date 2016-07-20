@@ -228,7 +228,7 @@ function export_sentences () {
   // init new sql script
   $sql_export = "INSERT INTO Sentences(`ID`, `ID_Parent`, `Text`, `HasChildren`) VALUES";
   while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-    $sql_export .= "\n('" . $row['ID'] . ", " . $row['ID_Parent'] . ', "'.$row['Text'].'", ' . $row['HasChildren'] . "),";
+    $sql_export .= "\n(" . $row['ID'] . ", " . $row['ID_Parent'] . ', "'.$row['Text'].'", ' . $row['HasChildren'] . "),";
   }
   $sql_export = rtrim($sql_export, ','); // remove trailing row separator
   $sql_export .= ";";
