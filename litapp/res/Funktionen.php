@@ -228,7 +228,7 @@ function export_sentences () {
   // init new sql script
   $sql_export = "INSERT INTO Sentences(`ID`, `ID_Parent`, `Text`, `HasChildren`) VALUES";
   while ($row = mysqli_fetch_array($output, MYSQL_ASSOC)) {
-    $sql_export .= "\n('" . implode($row, "', '") . "')";
+    $sql_export .= "\n('" . implode("', '", $row ) . "')";
   }
   $sql_export .= ";";
   // output sql script
