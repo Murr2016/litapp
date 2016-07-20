@@ -3,11 +3,11 @@ session_start();
 require_once("res/settings.php"); 
 require_once("res/Funktionen.php"); 
 
-/*
+
 $Hintergrund_Farben = array ( 0 => "#F60", 1 => "#CF0", 2 => "#3CF", 3 => "#09F", 4 => "#3C0", 5 => "#F90", 6 => "#3CC", 7 => "#69F", 8 => "#F3C", 9 => "#FFF", 10 => "#C3C3C3", 11 => "#F03"); 
 
 $Hintergrund = $Hintergrund_Farben[mt_rand(0,11)];
-*/
+
 ?>
 
 
