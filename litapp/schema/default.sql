@@ -6,7 +6,6 @@ SET time_zone = "+01:00";
 --
 
 CREATE DATABASE IF NOT EXISTS `LitUpDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `LitUpDB`;
 
 -- --------------------------------------------------------
 
@@ -14,12 +13,12 @@ USE `LitUpDB`;
 -- Tabellenstruktur für Tabelle `Sentences`
 --
 
-CREATE TABLE `Sentences` (
+CREATE TABLE `LitUpDB`.`Sentences2` (
   `ID` int(11) NOT NULL,
   `ID_Parent` int(11) NOT NULL,
   `HasChildren` boolean DEFAULT '0',
   `Text` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Indizes der exportierten Tabellen
@@ -28,12 +27,12 @@ CREATE TABLE `Sentences` (
 --
 -- Indizes für die Tabelle `Sentences`
 --
-ALTER TABLE `Sentences`
+ALTER TABLE `LitUpDB`.`Sentences`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ID` (`ID`);
 
 --
 -- AUTO_INCREMENT für Tabelle `Sentences`
 --
-ALTER TABLE `Sentences`
+ALTER TABLE `LitUpDB`.`Sentences`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
