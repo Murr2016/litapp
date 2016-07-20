@@ -230,7 +230,7 @@ function export_sentences () {
   while ($row = mysqli_fetch_array($output, MYSQL_ASSOC)) {
     $sql_export .= "\n('" . implode($row, "', '") . "')";
   }
-  $sql_export .= ";"
+  $sql_export .= ";";
   // output sql script
   echo $sql_export;
   // close connection and free result
