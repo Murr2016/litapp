@@ -13,7 +13,7 @@ CREATE DATABASE IF NOT EXISTS `LitUpDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_
 -- Tabellenstruktur für Tabelle `Sentences`
 --
 
-CREATE TABLE `LitUpDB`.`Sentences2` (
+CREATE TABLE `LitUpDB`.`Sentences` (
   `ID` int(11) NOT NULL,
   `ID_Parent` int(11) NOT NULL,
   `HasChildren` boolean DEFAULT '0',
