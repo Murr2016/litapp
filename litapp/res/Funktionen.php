@@ -226,7 +226,7 @@ function export_sentences () {
   $sql = "SELECT * FROM Sentences;";
   $result = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
   // init new sql script
-  $sql_export = "INSERT INTO Sentences(`ID`, `ID_Parent`, `Text`, `HasChildren`) VALUES"
+  $sql_export = "INSERT INTO Sentences(`ID`, `ID_Parent`, `Text`, `HasChildren`) VALUES";
   while ($row = mysqli_fetch_array($output, MYSQL_ASSOC)) {
     $sql_export .= "\n('" . implode($row, "', '") . "')";
   }
