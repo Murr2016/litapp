@@ -5,7 +5,7 @@ require_once("res/Funktionen.php");
 if(isset($_POST["submit"])) {
     // read uploaded file into string
     $sql_string = file_get_contents($_FILES['uploadedFile']['tmp_name']);
-    // connect to database
+    // connect to database and execute uploaded script
     sql_execute($sql_string);
 }
 ?>
