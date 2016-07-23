@@ -209,7 +209,7 @@ function get_all_sentences_table ()
 		  $Story_Tabelle .= "<tr>";
 		  $Story_Tabelle .= "<td>". $zeile["ID"] . "</td>";
 		  $Story_Tabelle .= "<td>". $zeile["ID_Parent"] . "</td>";
-		  $Story_Tabelle .= "<td>". $zeile["Text"] . "</td>";
+		  $Story_Tabelle .= "<td>". $zeile["Text"]. "</td>";
 		  $Story_Tabelle .= "<td>". $zeile["HasChildren"] . "</td>";
 		  $Story_Tabelle .= "</tr>";
 	}
@@ -245,5 +245,29 @@ function sql_execute ($sql) {
   $result = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());
   mysqli_free_result($result);
 }
+
+// Schreibt in die DB (form_handler)
+function put_to_DB($ID_Parent, $Text) {
+	
+	$db_link = mysqli_connect (
+		MYSQL_HOST, 
+		MYSQL_BENUTZER, 
+		MYSQL_KENNWORT, 
+		MYSQL_DATENBANK);
+	if ($ID_Parent != 0) {	
+	$esc_Text = mysqli_escape_string($db_link, $Text);
+	$sql = "INSERT INTO Sentences 
+		(ID, ID_Parent, Text, HasChildren) VALUES (NULL, '$ID_Parent','$esc_Text', 0); UPDATE Sentences SET HasChildren = 1 WHERE ID = $ID_Parent;";
+		$db_erg = mysqli_multi_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());	
+	} else {
+	$esc_Text = mysqli_escape_string($db_link, $Text);
+	$sql = "INSERT INTO Sentences 
+		(ID, ID_Parent, Text, HasChildren) VALUES (NULL, '$ID_Parent', '$esc_Text', 0);";
+		$db_erg = mysqli_query($db_link, $sql) or die("Anfrage fehlgeschlagen: " . mysqli_error());			
+	}
+		
+		mysqli_close($db_link);
+}
+
 
 ?>

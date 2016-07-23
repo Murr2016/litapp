@@ -27,11 +27,10 @@ function setFocusToTextBox(){
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>CortonaDairy Machine</title>
+<title>LitApp</title>
 <style>
 
 @font-face { font-family: 'Akzidenz'; src: url('res/AkzidenzGroteskLight.otf') format('opentype'); }
-@font-face { font-family: 'Logo'; src: url('res/AkzidenzGroteskMedium.otf') format('opentype'); }
 
 Html, body {
 	margin:0;
@@ -41,7 +40,7 @@ Html, body {
 	background:<?=$Hintergrund?>;
 	
 	}
-#Input_Text {
+#Eingabe {
 	font-family: Akzidenz;
 	font-size:20px;
 	font-weight:lighter;
@@ -86,13 +85,13 @@ p {
 <p onmouseover="setFocusToTextBox();" onmousemove="setFocusToTextBox();" onmouseup="setFocusToTextBox();"><?=$random['Text']?></p>
 <form name="LitApp" Id="LitApp" method="post" action="res/form_handler.php">
   <p>
-    <textarea name="Input_Text" id="Input_Text"></textarea> 
+    <textarea name="Eingabe" id="Eingabe"></textarea> 
 	<script type="text/javascript">
-document.getElementById('Input_Text').onkeydown = function(e){
+document.getElementById('Eingabe').onkeydown = function(e){
       e = e || window.event;
       var key = e.keyCode || e.which || e.charCode, shift = e.modifiers ? e.modifiers & Event.SHIFT_MASK : e.shiftKey;
       if(key == 13 && !shift){
-        if(document.getElementById('Input_Text').value != "") {
+        if(document.getElementById('Eingabe').value != "") {
 		document.LitApp.submit.click();
 		}else {
 			return false;
